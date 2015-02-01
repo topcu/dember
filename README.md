@@ -1,7 +1,6 @@
 ## Dumber Laravel Dummy Cache Driver
 
-Another Dummy Cache driver, that can be used in development environmet.
-It can log every call made to the driver.
+Another Dummy Cache driver, which can log every call made to the driver if enabled by config.
 
 ##### Installation
 
@@ -29,7 +28,7 @@ Add service provider to your `app/config/app.php` file:
 # ...
 ```
 
-
+##### Enabling Logging
 If you wish to enable logging,
 you can add `app/config/dumber.php`
 
