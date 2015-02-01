@@ -1,0 +1,21 @@
+{
+    "name": "topcu/dumber",
+    "description": "Yet another dummy cache driver for laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "H. Çağrı TOPÇU",
+            "email": "hctopcu@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Topcu\\Dumber": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
