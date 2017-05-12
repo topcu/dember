@@ -1,63 +1,55 @@
-## Dumber Laravel Dummy Cache Driver
+# Dumber Laravel Dummy Cache Driver
 
 Another Dummy Cache driver, which can log every call made to the driver if enabled by config.
 
-##### Installation
-
-Recommended installation is trough *composer*, add to your `composer.json`:
-
-```json
-
-"require": {
-	"topcu/dumber": "dev-master"
-}
-
-```
-
-Add service provider to your `app/config/app.php` file:
-
-```php
-
-# ...
-
-'providers' => array(
-    # ...
-    'Topcu\Dumber\DumberServiceProvider',
-),
-
-# ...
-```
-
-##### Enabling Logging
-If you wish to enable logging,
-you can add `app/config/dumber.php`
-
-```php
-<?php
-return array(
-    "log_enabled" => true,
-);
-
-```
-
-Or just Publish package configuration:
-
+## Installation
+Via Composer
 ```sh
-
-php artisan config:publish topcu/dumber
-
+    $ composer require topcu/dumber`
 ```
 
-
-##### Usage
-
-**In your cache.php config file change driver to dumber**
+Add the service provider to the providers array in `config/app.php`.
 
 ```php
-# ...
-//'driver' => 'file',
-'driver' => 'dumber',
-
-# ...
-
+    # ...
+    'providers' => array(
+        # ...
+        'Topcu\Dumber\DumberServiceProvider',
+    ),
+    # ...
 ```
+
+
+## Usage
+
+In your `config/cache.php`  change add a store using dumber as driver.
+
+```php
+    # ...
+    'stores' => [
+    # ...
+        'dumber' => [
+            'driver' => 'dumber',
+        ],
+    # ...
+```
+And set your default store if needed.
+```php
+    'default' => 'dumber',
+```
+
+## Enabling Logging
+If you wish to enable logging, you need do publish package config file and set `log_enabled` to `true`
+```sh
+    php artisan vendor:publish --provider="Topcu\Dumber\DumberServiceProvider"
+```
+
+`app/config/dumber.php` :
+```php
+    <?php
+    return [
+        "log_enabled" => true,
+        "log_level" => "notice"
+    ];
+```
+

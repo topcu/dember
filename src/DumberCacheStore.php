@@ -2,8 +2,9 @@
 
 namespace Topcu\Dumber;
 
-use Illuminate\Contracts\Cache\Store;
 use Illuminate\Contracts\Logging\Log;
+use Illuminate\Contracts\Cache\Store;
+use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Cache\RetrievesMultipleKeys;
 
 class DumberCacheStore implements Store
@@ -18,13 +19,13 @@ class DumberCacheStore implements Store
     protected $prefix;
 
     /**
-     * @var array driver configuration
+     * @var bool enable driver
      */
     protected $log_enabled;
     /**
-     * @var Log
+     * @var string
      */
-    private $logger;
+    protected $log_level;
 
     /**
      * Create a new Dummy cache store.
@@ -32,18 +33,28 @@ class DumberCacheStore implements Store
      * @param  string  $prefix
      * @return void
      */
-    public function __construct($prefix = '', Log $logger)
+    public function __construct(ConfigRepository $config, Log $logger)
     {
-        $this->prefix = $prefix;
         $this->logger = $logger;
-        $this->log_enabled = config("dumber.log_enabled", false);
+        $this->prefix = $config->get("cache.prefix", "");
+        $this->log_enabled = $config->get("dumber.log_enabled", false);
+        $this->log_level = $config->get("dumber.log_level", "notice");
     }
 
     protected function log($method, $params = [])
     {
         if($this->log_enabled){
-            $this->logger->notice("Dumber:$method :", $params);
+            Log::log($this->log_level, "Dumber:$method :", $params);
         }
+    }
+
+    public function enableLog()
+    {
+        $this->log_enabled = true;
+    }
+    public function disableLog()
+    {
+        $this->log_enabled = false;
     }
 
 
