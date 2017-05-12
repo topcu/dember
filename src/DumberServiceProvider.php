@@ -7,7 +7,7 @@ class DumberServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $config_path = __DIR__.'../config/config.php';
+        $config_path = __DIR__.'/../config/config.php';
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
