@@ -5,7 +5,7 @@ Another Dummy Cache driver, which can log every call made to the driver if enabl
 ## Installation
 Via Composer
 ```sh
-    $ composer require topcu/dumber`
+    $ composer require topcu/dumber
 ```
 
 Add the service provider to the providers array in `config/app.php`.
@@ -53,3 +53,4 @@ If you wish to enable logging, you need do publish package config file and set `
     ];
 ```
 
+You can also enable/disable logging on-the-fly with `$cache->enableLog()` and `$cache->disableLog()`
