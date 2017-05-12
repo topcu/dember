@@ -44,7 +44,7 @@ class DumberCacheStore implements Store
     protected function log($method, $params = [])
     {
         if($this->log_enabled){
-            Log::log($this->log_level, "Dumber:$method :", $params);
+            $this->logger->log($this->log_level, "Dumber:$method :", $params);
         }
     }
 
